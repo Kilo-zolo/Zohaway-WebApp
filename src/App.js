@@ -1,11 +1,11 @@
 import React from 'react'
-import bgImg from './assets/cybertree.png'
+import Hero from './components/hero';
 
 
 function App() {
   return (
-    <div className='w-full h-full'>
-      <image src ={bgImg} />
+    <div>
+      <Hero />
     </div>
   );
 }
