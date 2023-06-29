@@ -32,4 +32,10 @@ insert into Products(ID, CatID, PROName, IMG, COST, STOCK_Qnty) values
 insert into Products(ID, CatID, PROName, IMG, COST, STOCK_Qnty) values
 (403, 004, 'New York Cheesecake', 'https://zohawaystorage.blob.core.windows.net/zohaway/cheesecake.jpeg', $21, 50)
 
-Select * from Products
+Select * from Orders
+SELECT * FROM Order_Items
+
+SELECT * FROM Users
+DELETE FROM Users WHERE LName = 'Gupta'
+DELETE FROM Order_Items
+Delete from Orders

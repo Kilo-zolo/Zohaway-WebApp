@@ -1,43 +1,78 @@
-CREATE TABLE Categories (
-    ID int, 
-    CatName nvarchar(1000),
-    IMG nvarchar(255),
-    CONSTRAINT CategoryPK PRIMARY KEY (ID)
-)
+CREATE TABLE [dbo].[Categories] (
+    [ID]      INT             NOT NULL,
+    [CatName] NVARCHAR (1000) NULL,
+    [IMG]     NVARCHAR (255)  NULL,
+    CONSTRAINT [CategoryPK] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
 
-CREATE TABLE Products (
-    ID int, 
-    CatID int FOREIGN KEY REFERENCES Categories(ID), 
-    PROName nvarchar(1000), 
-    IMG nvarchar(255),
-    COST int, 
-    STOCK_Qnty int,
-    CONSTRAINT ProductPK PRIMARY KEY(ID)
-)
 
-CREATE TABLE Users (
-    ID int, 
-    FName nvarchar(1000),
-    LName nvarchar(1000),
-    PNumber int, 
-    Email nvarchar(320), 
-    Passwords nvarchar(1000),
-    Membership bit,
-    CONSTRAINT UserPK PRIMARY KEY(ID)
-)
+CREATE TABLE [dbo].[Products] (
+    [ID]         INT             NOT NULL,
+    [CatID]      INT             NULL,
+    [PROName]    NVARCHAR (1000) NULL,
+    [IMG]        NVARCHAR (255)  NULL,
+    [COST]       MONEY           NULL,
+    [STOCK_Qnty] INT             NULL,
+    CONSTRAINT [ProductPK] PRIMARY KEY CLUSTERED ([ID] ASC),
+    FOREIGN KEY ([CatID]) REFERENCES [dbo].[Categories] ([ID])
+);
 
-CREATE TABLE Orders (
-    ID int, 
-    UserID int FOREIGN KEY REFERENCES Users(ID), 
-    Price int, 
-    Date_Time varchar(1000), 
-    CONSTRAINT OrderPK PRIMARY KEY(ID)
-)
 
-CREATE TABLE Order_Items (
-    ID int, 
-    OrderID int FOREIGN KEY REFERENCES Orders(ID),
-    ProductID int FOREIGN KEY REFERENCES Products(ID), 
-    Quantity int,
-    CONSTRAINT OrderItemPK PRIMARY KEY(ID)
-)
+CREATE TABLE [dbo].[Users] (
+    [ID]         INT             IDENTITY (1, 1) NOT NULL,
+    [FName]      NVARCHAR (1000) NULL,
+    [LName]      NVARCHAR (1000) NULL,
+    [PNumber]    INT             NULL,
+    [Email]      NVARCHAR (320)  NULL,
+    [Passwords]  NVARCHAR (1000) NULL,
+    [Membership] BIT             NULL,
+    CONSTRAINT [UserPK] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+
+
+CREATE TABLE [dbo].[Orders] (
+    [ID]        BIGINT         NOT NULL,
+    [UserID]    INT            NULL,
+    [Price]     MONEY          NULL,
+    [Date_Time] VARCHAR (1000) NULL,
+    CONSTRAINT [OrderPK] PRIMARY KEY CLUSTERED ([ID] ASC),
+    FOREIGN KEY ([UserID]) REFERENCES [dbo].[Users] ([ID])
+);
+
+
+CREATE TABLE [dbo].[Order_Items] (
+    [ID]        INT    IDENTITY (1, 1) NOT NULL,
+    [OrderID]   BIGINT NOT NULL,
+    [ProductID] INT    NOT NULL,
+    [Quantity]  INT    NOT NULL,
+    CONSTRAINT [OrderItemPK] PRIMARY KEY CLUSTERED ([ID] ASC),
+    FOREIGN KEY ([OrderID]) REFERENCES [dbo].[Orders] ([ID]),
+    FOREIGN KEY ([ProductID]) REFERENCES [dbo].[Products] ([ID])
+);
+
+
+GO
+
+CREATE TRIGGER email_membership_check 
+ON Users
+AFTER INSERT
+AS
+BEGIN
+    IF EXISTS (
+        SELECT 1 
+        FROM inserted 
+        WHERE ((Email IS NULL OR Email = '') AND Membership = 1) 
+    )
+    BEGIN
+        RAISERROR ('Email must be provided if you want to be a member.', 16, 1);
+        ROLLBACK TRANSACTION;
+        RETURN;
+    END;
+END;
+
+
+
+
+
+
+

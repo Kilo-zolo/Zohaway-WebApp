@@ -13,16 +13,18 @@ module.exports = async function (context, req) {
     };
 
     try {
-        // Variable for Category param choice- js
-        var cn = req.query.cn;
+        // Variable for User param choice- js
+        var email = req.body.email;
+        var pass = req.body.password;
 
         // Create connection instance
         let pool = await sql.connect(config);
             
         // Execute a SQL statement.
         let result = await pool.request()
-            .input('cn', sql.NVarChar, cn)
-            .query('SELECT Products.PROName, Products.IMG, Products.COST, Categories.CatName FROM Products INNER JOIN Categories ON Products.CatID=Categories.ID WHERE Categories.CatName=@cn');
+            .input('email', sql.NVarChar, email)
+            .input('password', sql.NVarChar, pass)
+            .query('SELECT ID, FName, LName, PNumber, Email, Membership FROM Users WHERE Email=@email AND Passwords=@password');
         
         // Print the result
         context.log(result);
