@@ -1,0 +1,1 @@
+select CatName, IMG FROM Categories
