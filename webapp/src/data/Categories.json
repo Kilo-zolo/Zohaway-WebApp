@@ -1,0 +1,18 @@
+[
+    {
+      "CatName": "Beverages",
+      "IMG": "https://zohawaystorage.blob.core.windows.net/zohaway/Drinks_CAT.png"
+    },
+    {
+      "CatName": "Appetizers",
+      "IMG": "https://zohawaystorage.blob.core.windows.net/zohaway/Starters_CAT.png"
+    },
+    {
+      "CatName": "Mains",
+      "IMG": "https://zohawaystorage.blob.core.windows.net/zohaway/Mains_CAT.png"
+    },
+    {
+      "CatName": "Desserts",
+      "IMG": "https://zohawaystorage.blob.core.windows.net/zohaway/Deserts_CAT.png"
+    }
+  ]
