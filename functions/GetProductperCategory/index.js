@@ -22,7 +22,7 @@ module.exports = async function (context, req) {
         // Execute a SQL statement.
         let result = await pool.request()
             .input('cn', sql.NVarChar, cn)
-            .query('SELECT Products.PROName, Products.IMG, Products.COST, Categories.CatName FROM Products INNER JOIN Categories ON Products.CatID=Categories.ID WHERE Categories.CatName=@cn');
+            .query('SELECT Products.ID, Products.PROName, Products.IMG, Products.COST, Categories.CatName FROM Products INNER JOIN Categories ON Products.CatID=Categories.ID WHERE Categories.CatName=@cn');
         
         // Print the result
         context.log(result);
