@@ -77,7 +77,7 @@ module.exports = async function (context, req) {
                 context.log(fresult);
             // Create a for loop that will iterate over the order list to save the product id's and quantities to the order items table
              for (var i = 0; i < req.body.order.length; i++) {
-                var pid = req.body.order[i].PID;
+                var pid = req.body.order[i].id;
                 var qnty = req.body.order[i].quantity;
                 let itresult = await pool.request()
                     .input('oid', sql.BigInt, oid)
