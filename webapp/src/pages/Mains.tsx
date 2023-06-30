@@ -1,8 +1,9 @@
 import { Col, Row } from "react-bootstrap"
-import MainItems from "../data/Mains.json"
+import { useMains } from "../components/MainsFetch";
 import { MainItem } from "../components/MainItem"
 
 export function Main() {
+    const MainItems = useMains();
     return <>
         <h1>Mains</h1>
         <Row md={2} xs={1} lg={3} className="g-3">

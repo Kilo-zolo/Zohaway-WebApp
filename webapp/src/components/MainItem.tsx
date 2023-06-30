@@ -2,7 +2,7 @@ import { Button, Card } from "react-bootstrap"
 import { formatCurrency } from "../utilities/formatCurrency"
 import { useShoppingCart } from "../context/ShoppingCartContext"
 
-type MainItemProps = {
+export type MainItemProps = {
     ID: number,
     PROName: string, 
     IMG: string, 

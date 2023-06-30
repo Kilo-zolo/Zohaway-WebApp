@@ -1,6 +1,6 @@
 import { Button, Stack } from "react-bootstrap"
 import { useShoppingCart } from "../context/ShoppingCartContext"
-import productItems from "../data/Products.json"
+import {useProducts} from "../components/ProductsFetch";
 import { formatCurrency } from "../utilities/formatCurrency"
 
 type CartItemProps = {
@@ -9,6 +9,7 @@ type CartItemProps = {
 }
 
 export function CartItem({id, quantity}: CartItemProps) {
+    const productItems = useProducts();
     const {removeFromCart} = useShoppingCart()
     const item = productItems.find(i => i.ID === id)
     if(item == undefined) return undefined

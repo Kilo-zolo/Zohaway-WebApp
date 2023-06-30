@@ -1,8 +1,10 @@
 import { Col, Row } from "react-bootstrap"
-import beverageItems from "../data/Beverages.json"
-import { BeverageItem } from "../components/beverageItem"
+import { useBeverages } from "../components/BeveragesFetch";
+import { BeverageItem } from "../components/BeverageItem"
+
 
 export function Beverage() {
+    const beverageItems = useBeverages();
     return <>
         <h1>Beverages</h1>
         <Row md={2} xs={1} lg={3} className="g-3">
