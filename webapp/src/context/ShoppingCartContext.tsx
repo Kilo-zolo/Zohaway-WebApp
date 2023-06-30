@@ -17,7 +17,7 @@ type ShoppingCartContext = {
     cartItems: CartItem[]
 }
 
-type CartItem = {
+export type CartItem = {
     id: number
     quantity: number
 }

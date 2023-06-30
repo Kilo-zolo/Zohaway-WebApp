@@ -2,7 +2,6 @@ import {Routes, Route} from "react-router-dom"
 import { Container } from "react-bootstrap"
 import { Home } from "./pages/Home"
 import { Menu } from "./pages/Menu"
-import { Login } from "./pages/Login"
 import { Navbar } from "./components/Navbar"
 import { Beverage } from "./pages/Beverages"
 import { Appetizer } from "./pages/Appetizers"
@@ -21,7 +20,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/menu" element={<Menu />} />
-          <Route path="/login" element={<Login />} />
           <Route path="/category/Beverages" element={<Beverage />} />
           <Route path="/category/Appetizers" element={<Appetizer />} />
           <Route path="/category/Mains" element={<Main />} />

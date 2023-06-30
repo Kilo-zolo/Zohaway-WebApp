@@ -1,111 +1,84 @@
 import React, { useState } from 'react';
-import {total_amount} from "../components/ShoppingCart";
+import { total_amount } from "../components/ShoppingCart";
 import { formatCurrency } from "../utilities/formatCurrency";
+import { OrderUserType, placeOrder } from '../components/OrderPlace';
+import { useShoppingCart } from '../context/ShoppingCartContext';
+import { useNavigate } from 'react-router-dom';
 
-interface FormData {
-  firstName: string;
-  lastName: string;
-  phone: string;
-  registerForMembership: boolean;
-  email?: string;
-  password?: string;
-  paymentPreference?: string;
-  creditCardNumber?: string;
-  creditCardHolderName?: string;
-  cvc?: string;
-  expiryDate?: string;
-}
-
-class CheckoutForm {
-  formData: FormData;
-
-  constructor() {
-    this.formData = {
-      firstName: '',
-      lastName: '',
-      phone: '',
-      registerForMembership: false,
-    };
-  }
-
-  handleFirstNameChange(event: React.ChangeEvent<HTMLInputElement>) {
-    this.formData.firstName = event.target.value;
-  }
-
-  handleLastNameChange(event: React.ChangeEvent<HTMLInputElement>) {
-    this.formData.lastName = event.target.value;
-  }
-
-  handlePhoneChange(event: React.ChangeEvent<HTMLInputElement>) {
-    this.formData.phone = event.target.value;
-  }
-
-  handleMembershipChange(event: React.ChangeEvent<HTMLInputElement>) {
-    this.formData.registerForMembership = event.target.value === 'yes';
-  }
-
-  handleEmailChange(event: React.ChangeEvent<HTMLInputElement>) {
-    this.formData.email = event.target.value;
-  }
-
-  handlePasswordChange(event: React.ChangeEvent<HTMLInputElement>) {
-    this.formData.password = event.target.value;
-  }
-
-  handlePaymentPreferenceChange(event: React.ChangeEvent<HTMLInputElement>) {
-    this.formData.paymentPreference = event.target.value;
-  }
-
-  handleCreditCardNumberChange(event: React.ChangeEvent<HTMLInputElement>) {
-    this.formData.creditCardNumber = event.target.value;
-  }
-
-  handleCreditCardHolderNameChange(event: React.ChangeEvent<HTMLInputElement>) {
-    this.formData.creditCardHolderName = event.target.value;
-  }
-
-  handleCvcChange(event: React.ChangeEvent<HTMLInputElement>) {
-    this.formData.cvc = event.target.value;
-  }
-
-  handleExpiryDateChange(event: React.ChangeEvent<HTMLInputElement>) {
-    this.formData.expiryDate = event.target.value;
-  }
-
-  handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    // Perform form submission or further processing with the form data
-    console.log(this.formData);
-  }
-}
 
 export function Checkout() {
-  const checkoutForm = new CheckoutForm();
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    phone: '',
+    registerForMembership: false,
+    paymentPreference: 'Cash', 
+    email: '',
+    password: '',
+    creditCardNumber: '',
+    creditCardHolderName: '',
+    cvc: '',
+    expiryDate: '',
+  });
   const [showMembershipFields, setShowMembershipFields] = useState(false);
   const [showCreditCardFields, setShowCreditCardFields] = useState(false);
+  const { cartItems } = useShoppingCart(); // Access cartItems directly from the context
+  const navigate = useNavigate();
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: name === 'registerForMembership' ? value === 'yes' : value,
+    }));
+  };
 
   const handleMembershipChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value === 'yes';
     setShowMembershipFields(value);
-    checkoutForm.handleMembershipChange(event);
+    handleChange(event);
   };
 
   const handlePaymentPreferenceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value === 'creditCard';
     setShowCreditCardFields(value);
-    checkoutForm.handlePaymentPreferenceChange(event);
+    handleChange(event);
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+
+    event.preventDefault();
+    const { firstName, lastName, phone, email, password, registerForMembership } = formData;
+
+    const orderUser: OrderUserType = {
+      ID: "",
+      first: firstName,
+      last: lastName,
+      pnum: parseInt(phone),
+      email: email || '',
+      pass: password || '',
+      member: Number(registerForMembership),
+    };
+
+    // Invoke the placeOrder function with the form data
+    placeOrder(100, orderUser, cartItems);
+    localStorage.clear();
+    cartItems.splice(0);
+    navigate('/');
+    window.location.reload();
   };
 
   return (
-    <form onSubmit={(event) => checkoutForm.handleSubmit(event)} style={formStyle}>
+    <form onSubmit={handleSubmit} style={formStyle}>
       <h1 style={headerStyle}>Checkout</h1>
       <h2 style={labelStyle}>Your Total is: {formatCurrency(total_amount)}</h2>
       <div style={inputGroupStyle}>
         <label style={labelStyle}>First Name:</label>
         <input
           type="text"
+          name="firstName"
           required
-          onChange={(event) => checkoutForm.handleFirstNameChange(event)}
+          onChange={handleChange}
           style={inputStyle}
         />
       </div>
@@ -113,7 +86,8 @@ export function Checkout() {
         <label style={labelStyle}>Last Name:</label>
         <input
           type="text"
-          onChange={(event) => checkoutForm.handleLastNameChange(event)}
+          name="lastName"
+          onChange={handleChange}
           style={inputStyle}
         />
       </div>
@@ -121,8 +95,9 @@ export function Checkout() {
         <label style={labelStyle}>Phone:</label>
         <input
           type="text"
+          name="phone"
           required
-          onChange={(event) => checkoutForm.handlePhoneChange(event)}
+          onChange={handleChange}
           style={inputStyle}
         />
       </div>
@@ -131,7 +106,7 @@ export function Checkout() {
         <div style={radioContainerStyle}>
           <input
             type="radio"
-            name="membership"
+            name="registerForMembership"
             value="yes"
             onChange={handleMembershipChange}
             style={radioStyle}
@@ -139,7 +114,7 @@ export function Checkout() {
           <span style={radioLabelStyle}>Yes</span>
           <input
             type="radio"
-            name="membership"
+            name="registerForMembership"
             value="no"
             onChange={handleMembershipChange}
             checked={!showMembershipFields}
@@ -154,8 +129,9 @@ export function Checkout() {
             <label style={labelStyle}>Email:</label>
             <input
               type="email"
+              name="email"
               required
-              onChange={(event) => checkoutForm.handleEmailChange(event)}
+              onChange={handleChange}
               style={inputStyle}
             />
           </div>
@@ -163,8 +139,9 @@ export function Checkout() {
             <label style={labelStyle}>Password:</label>
             <input
               type="password"
+              name="password"
               required
-              onChange={(event) => checkoutForm.handlePasswordChange(event)}
+              onChange={handleChange}
               style={inputStyle}
             />
           </div>
@@ -176,7 +153,7 @@ export function Checkout() {
           <input
             type="radio"
             name="paymentPreference"
-            value="cash"
+            value="Cash"
             onChange={handlePaymentPreferenceChange}
             style={radioStyle}
           />
@@ -186,9 +163,10 @@ export function Checkout() {
             name="paymentPreference"
             value="creditCard"
             onChange={handlePaymentPreferenceChange}
+            checked={showCreditCardFields}
             style={radioStyle}
           />
-          <span style={radioLabelStyle}>Credit Card</span>
+          <span style={radioLabelStyle}>Credit Card inc. 1.75% processing fee</span>
         </div>
       </div>
       {showCreditCardFields && (
@@ -197,8 +175,9 @@ export function Checkout() {
             <label style={labelStyle}>Credit Card Number:</label>
             <input
               type="text"
+              name="creditCardNumber"
               required
-              onChange={(event) => checkoutForm.handleCreditCardNumberChange(event)}
+              onChange={handleChange}
               style={inputStyle}
             />
           </div>
@@ -206,8 +185,9 @@ export function Checkout() {
             <label style={labelStyle}>Credit Card Holder Name:</label>
             <input
               type="text"
+              name="creditCardHolderName"
               required
-              onChange={(event) => checkoutForm.handleCreditCardHolderNameChange(event)}
+              onChange={handleChange}
               style={inputStyle}
             />
           </div>
@@ -215,8 +195,9 @@ export function Checkout() {
             <label style={labelStyle}>CVC:</label>
             <input
               type="text"
+              name="cvc"
               required
-              onChange={(event) => checkoutForm.handleCvcChange(event)}
+              onChange={handleChange}
               style={inputStyle}
             />
           </div>
@@ -224,18 +205,15 @@ export function Checkout() {
             <label style={labelStyle}>Expiry Date:</label>
             <input
               type="text"
+              name="expiryDate"
               required
-              onChange={(event) => checkoutForm.handleExpiryDateChange(event)}
+              onChange={handleChange}
               style={inputStyle}
             />
           </div>
         </>
       )}
-      <div style={inputGroupStyle}>
-        <button type="submit" style={submitButtonStyle}>
-          Submit
-        </button>
-      </div>
+      <button type="submit" style={submitButtonStyle}>Place Order</button>
     </form>
   );
 }

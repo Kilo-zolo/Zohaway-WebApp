@@ -14,11 +14,6 @@ export function Navbar() {
                     Menu
                 </Nav.Link>
             </Nav>
-            <Nav>
-                <Nav.Link to="/login" as={NavLink}>
-                    Login
-                </Nav.Link>
-            </Nav>
             {cartQuantity > 0 && (
             <Button onClick={openCart} style={{width: "3rem", height: "3rem", position: "relative"}}
                     variant="outline-primary"
