@@ -39,3 +39,7 @@ SELECT * FROM Users
 DELETE FROM Users WHERE LName = 'Gupta'
 DELETE FROM Order_Items
 Delete from Orders
+
+Select * from Products
+
+SELECT ID FROM Users WHERE (Email IS NOT NULL AND Email <> '') AND EMAIL = '';
