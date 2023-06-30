@@ -18,4 +18,4 @@ SQL folder:
  - create_tables.sql: Primary SQL script used to create the DB structure and includes tables, constraints and triggers  
 
 WebApp folder: Contains source for react typescript frontend 
-- TBC
+- Work in Progress
