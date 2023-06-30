@@ -1,0 +1,26 @@
+[
+    {
+      "PROName": "Asahi Can-500ml",
+      "IMG": "https://zohawaystorage.blob.core.windows.net/zohaway/asahi.png",
+      "COST": 5,
+      "CatName": "Beverages"
+    },
+    {
+      "PROName": "Byron Bay",
+      "IMG": "https://zohawaystorage.blob.core.windows.net/zohaway/Byronbay.jpeg",
+      "COST": 8,
+      "CatName": "Beverages"
+    },
+    {
+      "PROName": "Sprite",
+      "IMG": "https://zohawaystorage.blob.core.windows.net/zohaway/sprite.jpeg",
+      "COST": 2.5,
+      "CatName": "Beverages"
+    },
+    {
+      "PROName": "Yellow Tail Shiraz-Bottle",
+      "IMG": "https://zohawaystorage.blob.core.windows.net/zohaway/shiraz.jpeg",
+      "COST": 41,
+      "CatName": "Beverages"
+    }
+  ]

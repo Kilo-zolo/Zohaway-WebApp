@@ -1,0 +1,14 @@
+[
+    {
+      "PROName": "Margharita Pizza",
+      "IMG": "https://zohawaystorage.blob.core.windows.net/zohaway/pizza.jpeg",
+      "COST": 22,
+      "CatName": "Mains"
+    },
+    {
+      "PROName": "Chicken Alfredo Pasta",
+      "IMG": "https://zohawaystorage.blob.core.windows.net/zohaway/pasta.jpeg",
+      "COST": 25,
+      "CatName": "Mains"
+    }
+  ]

@@ -4,6 +4,11 @@ import { Home } from "./pages/Home"
 import { Menu } from "./pages/Menu"
 import { Login } from "./pages/Login"
 import { Navbar } from "./components/Navbar"
+import { Beverage } from "./pages/Beverages"
+import { Appetizer } from "./pages/Appetizers"
+import { Main } from "./pages/Mains"
+import { Dessert } from "./pages/Desserts"
+
 
 function App() {
 
@@ -15,6 +20,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/menu" element={<Menu />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/category/Beverages" element={<Beverage />} />
+          <Route path="/category/Appetizers" element={<Appetizer />} />
+          <Route path="/category/Mains" element={<Main />} />
+          <Route path="/category/Desserts" element={<Dessert />} />
         </Routes>
       </Container>
     </>
