@@ -25,7 +25,7 @@ module.exports = async function (context, req) {
                 var last = req.body.user.last;
                 var pnum = req.body.user.pnum;
                 var email = req.body.user.email;
-                var pass = req.body.user.password;
+                var pass = req.body.user.pass;
                 var member = req.body.user.member;                
 
                 // IF a user mistankenly registers and uses an already utilized email the db will not consider 
