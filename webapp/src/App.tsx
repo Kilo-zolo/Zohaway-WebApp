@@ -8,14 +8,16 @@ import { Beverage } from "./pages/Beverages"
 import { Appetizer } from "./pages/Appetizers"
 import { Main } from "./pages/Mains"
 import { Dessert } from "./pages/Desserts"
+import { ShoppingCartProvider } from "./context/ShoppingCartContext"
 
 
 function App() {
 
   return(
     <>
-      <Navbar />
-      <Container className="mb-4">
+      <ShoppingCartProvider>
+        <Navbar />
+        <Container className="mb-4">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/menu" element={<Menu />} />
@@ -25,7 +27,8 @@ function App() {
           <Route path="/category/Mains" element={<Main />} />
           <Route path="/category/Desserts" element={<Dessert />} />
         </Routes>
-      </Container>
+        </Container>
+      </ShoppingCartProvider>
     </>
     
   ) 
