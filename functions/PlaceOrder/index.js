@@ -14,19 +14,19 @@ module.exports = async function (context, req) {
 
     try
     {
-        var uid = req.body.user[0].ID;
+        var uid = req.body.user.ID;
         var rset;
         // Create connection instance
         let pool = await sql.connect(config);
             // If the UID is empty the user will be prompted to register as a member/non-member
             if (uid == "")
             {
-                var first = req.body.user[0].first;
-                var last = req.body.user[0].last;
-                var pnum = req.body.user[0].pnum;
-                var email = req.body.user[0].email;
-                var pass = req.body.user[0].password;
-                var member = req.body.user[0].member;                
+                var first = req.body.user.first;
+                var last = req.body.user.last;
+                var pnum = req.body.user.pnum;
+                var email = req.body.user.email;
+                var pass = req.body.user.password;
+                var member = req.body.user.member;                
 
                 // IF a user mistankenly registers and uses an already utilized email the db will not consider 
                 //the records inputted and instead sign the user in directly
