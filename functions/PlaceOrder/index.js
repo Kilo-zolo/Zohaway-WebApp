@@ -33,7 +33,7 @@ module.exports = async function (context, req) {
                 
                 let sresult = await pool.request()
                     .input('email', sql.NVarChar, email)
-                    .query('SELECT ID FROM Users WHERE Email = @email');
+                    .query('SELECT ID FROM Users WHERE (EMAIL IS NOT NULL and Email = @email)');
                     rset = sresult.recordset;
                     if(sresult.rowsAffected == 0)
                     {
