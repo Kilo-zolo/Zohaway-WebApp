@@ -4,7 +4,7 @@ module.exports = async function (context, req) {
     // Configuration for your SQL Server.
     const config = {
         user: 'zohteksqladmin',
-        password: <password>,
+        password: process.env.AZURE_SQL_CONNECTION_STRING,
         server: 'zohaway-server.database.windows.net', 
         database: 'zohaway-db',
         options: {
