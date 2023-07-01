@@ -1,11 +1,13 @@
 # Zohaway Take Away Service Web Application #
+## https://zohaway.azurewebsites.net/ ##
+
 ## Technology Stack ##
 
 The application is built with the following technologies:
 
-- React.js (with Hooks and Context)
+- React (with Hooks and Context)
 - TypeScript
-- Vite.js
+- Vite
 - Azure for deployment
 - Bootstrap for UI styling
 
