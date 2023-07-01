@@ -22,7 +22,7 @@ npm run dev
 ```
 
 # High-Level Architecture #
-![Zohtek-WebApp (2)](https://github.com/Kilo-zolo/Zohaway-WebApp/assets/49636909/9016fae5-e7c6-4c18-8650-633420536b72)
+![Zohtek-WebApp (3)](https://github.com/Kilo-zolo/Zohaway-WebApp/assets/49636909/166dc7bd-3f5e-4089-8a51-300032d57fe3)
 
 - Azure WebApp with React framework as frontend
 - Azure functions as middle tier
