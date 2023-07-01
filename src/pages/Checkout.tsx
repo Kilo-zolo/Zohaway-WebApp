@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { total_amount } from "../components/ShoppingCart";
+import { getAmount } from "../components/ShoppingCart";
 import { formatCurrency } from "../utilities/formatCurrency";
 import { OrderUserType, placeOrder } from '../components/OrderPlace';
 import { useShoppingCart } from '../context/ShoppingCartContext';
@@ -19,12 +19,12 @@ export function Checkout() {
     creditCardHolderName: '',
     cvc: '',
     expiryDate: '',
+    hiddenMessage: ''
   });
   const [showMembershipFields, setShowMembershipFields] = useState(false);
   const [showCreditCardFields, setShowCreditCardFields] = useState(false);
-  const { cartItems } = useShoppingCart(); // Access cartItems directly from the context
+  const { cartItems, resetCart } = useShoppingCart(); // Access cartItems directly from the context
   const navigate = useNavigate();
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData(prevState => ({
@@ -49,7 +49,7 @@ export function Checkout() {
 
     event.preventDefault();
     const { firstName, lastName, phone, email, password, registerForMembership } = formData;
-
+ 
     const orderUser: OrderUserType = {
       ID: "",
       first: firstName,
@@ -60,18 +60,48 @@ export function Checkout() {
       member: Number(registerForMembership),
     };
 
+    var order_amount = getAmount();
+    var message = "Congratulations on your order! Hurry up and grab your delicious food within the next 30 minutes, or it might mysteriously transform into a pumpkin spice latte. Bon appétit!";
+
+    if(registerForMembership && order_amount > 0)
+    {
+      order_amount = order_amount - (order_amount * 0.5);  
+      message = message + " As a member you have scored an additional 5% discount. Yes we are generous!"
+    }
+
     // Invoke the placeOrder function with the form data
-    placeOrder(100, orderUser, cartItems);
+    placeOrder(order_amount, orderUser, cartItems);
+    
+    if (order_amount == 0)
+    {
+      message = "We dont want to charge you for nothing! How about you add some of that delectable food to your order."
+    }
+
+    setFormData(prevState => ({
+      ...prevState,
+      hiddenMessage: message,
+    }));
+
     localStorage.clear();
-    cartItems.splice(0);
-    navigate('/');
-    window.location.reload();
+    //cartItems.splice(0);
+    resetCart();
   };
+
+  if (formData.hiddenMessage)
+  {
+    return(
+      <form style={formStyle}>
+      <p style={messageStyle}>{formData.hiddenMessage}</p>
+      <button type="submit" onClick={() => navigate('/')} style={submitButtonStyle}>Go Home</button>
+      
+      </form>
+    )
+  }
 
   return (
     <form onSubmit={handleSubmit} style={formStyle}>
       <h1 style={headerStyle}>Checkout</h1>
-      <h2 style={labelStyle}>Your Total is: {formatCurrency(total_amount)}</h2>
+      <h2 style={labelStyle}>Your Total is: {formatCurrency(getAmount())}</h2>
       <div style={inputGroupStyle}>
         <label style={labelStyle}>First Name:</label>
         <input
@@ -278,4 +308,10 @@ const submitButtonStyle: React.CSSProperties = {
   border: 'none',
   cursor: 'pointer',
   fontSize: '1rem',
+};
+
+const messageStyle: React.CSSProperties = {
+  marginTop: '1.5rem',
+  textAlign: 'center',
+  fontWeight: 'bold',
 };

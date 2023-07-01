@@ -12,7 +12,14 @@ type ShoppingCartProps = {
 export let total_amount = 0;
 export const setAmount = (value: number) => {
   total_amount = value;
+  localStorage.setItem("total_amount", total_amount.toString());
 };
+
+export const getAmount = () => {
+    total_amount = Number(localStorage.getItem("total_amount"));
+    return total_amount;
+  };
+  
 
 export function ShoppingCart({isOpen}: ShoppingCartProps) {
     const productItems = useProducts();
@@ -20,6 +27,7 @@ export function ShoppingCart({isOpen}: ShoppingCartProps) {
     const navigate = useNavigate(); // Invoke useNavigate hook
 
     const goToCheckout = () => {
+        closeCart()
         navigate('/checkout'); // Programmatically navigate to checkout page
     }
 
