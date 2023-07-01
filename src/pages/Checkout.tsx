@@ -15,11 +15,12 @@ export function Checkout() {
     paymentPreference: 'Cash', 
     email: '',
     password: '',
-    creditCardNumber: '',
+    creditCardNumber: 0,
     creditCardHolderName: '',
-    cvc: '',
+    cvc: 0,
     expiryDate: '',
-    hiddenMessage: ''
+    hiddenMessage: '',
+    order_amount: 0
   });
   const [showMembershipFields, setShowMembershipFields] = useState(false);
   const [showCreditCardFields, setShowCreditCardFields] = useState(false);
@@ -60,19 +61,19 @@ export function Checkout() {
       member: Number(registerForMembership),
     };
 
-    var order_amount = getAmount();
+    formData.order_amount = getAmount();
     var message = "Congratulations on your order! Hurry up and grab your delicious food within the next 30 minutes, or it might mysteriously transform into a pumpkin spice latte. Bon appétit!";
 
-    if(registerForMembership && order_amount > 0)
+    if(registerForMembership && formData.order_amount > 0)
     {
-      order_amount = order_amount - (order_amount * 0.5);  
+      formData.order_amount = formData.order_amount - (formData.order_amount * 0.05);  
       message = message + " As a member you have scored an additional 5% discount. Yes we are generous!"
     }
 
     // Invoke the placeOrder function with the form data
-    placeOrder(order_amount, orderUser, cartItems);
+    placeOrder(formData.order_amount, orderUser, cartItems);
     
-    if (order_amount == 0)
+    if (formData.order_amount == 0)
     {
       message = "We dont want to charge you for nothing! How about you add some of that delectable food to your order."
     }
@@ -91,9 +92,10 @@ export function Checkout() {
   {
     return(
       <form style={formStyle}>
+      <h1 style={headerStyle}>Checkout Complete</h1>
+      <h2 style={labelStyle}>Amount Charged: {formatCurrency(formData.order_amount)}</h2>        
       <p style={messageStyle}>{formData.hiddenMessage}</p>
       <button type="submit" onClick={() => navigate('/')} style={submitButtonStyle}>Go Home</button>
-      
       </form>
     )
   }
@@ -204,7 +206,11 @@ export function Checkout() {
           <div style={inputGroupStyle}>
             <label style={labelStyle}>Credit Card Number:</label>
             <input
-              type="text"
+              type="tel"
+              inputMode='numeric'
+              pattern="[0-9\s]{13,19}"
+              maxLength={19}
+              placeholder='xxxx xxxx xxxx xxxx'
               name="creditCardNumber"
               required
               onChange={handleChange}
@@ -224,7 +230,12 @@ export function Checkout() {
           <div style={inputGroupStyle}>
             <label style={labelStyle}>CVC:</label>
             <input
-              type="text"
+              type="tel"
+              inputMode='numeric'
+              pattern="[0-9\s]{3,4}"
+              minLength={3}
+              maxLength={4}
+              placeholder='xxxx'
               name="cvc"
               required
               onChange={handleChange}
@@ -234,7 +245,11 @@ export function Checkout() {
           <div style={inputGroupStyle}>
             <label style={labelStyle}>Expiry Date:</label>
             <input
-              type="text"
+              type="tel"
+              inputMode='numeric'
+              pattern="(0[1-9]|1[0-2])\/\d{2}"
+              maxLength={5}
+              placeholder='MM/YY'
               name="expiryDate"
               required
               onChange={handleChange}
