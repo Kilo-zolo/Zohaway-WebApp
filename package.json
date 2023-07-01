@@ -30,7 +30,7 @@
     "vite": "^4.3.9"
   },
   "description": "![Zohtek-WebApp (1)](https://github.com/Kilo-zolo/Zohaway-WebApp/assets/49636909/2259e316-65c1-4843-952f-0059f077273d)",
-  "main": "index.html",
+  "main": "./src/main.tsx",
   "author": "",
   "license": "ISC"
 }
