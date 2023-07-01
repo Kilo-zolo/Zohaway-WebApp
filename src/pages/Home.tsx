@@ -9,9 +9,13 @@ export const Home: FC = () => {
         };
     }, []);
 
+    const navigateToLink = () => {
+        window.open('/Menu', 'Menu');
+    }
+
     return (
         <div style={containerStyle}>
-          <img src="https://zohawaystorage.blob.core.windows.net/zohaway/Shrimp_One_hand_passing_on_a_take_away_parcel_from_a_restauraun_383e1fb4-27b0-4abc-bb31-79b417909d53.png" alt="Zohaway Takeaway Services" style={imageStyle} />
+          <img src="https://zohawaystorage.blob.core.windows.net/zohaway/Shrimp_One_hand_passing_on_a_take_away_parcel_from_a_restauraun_383e1fb4-27b0-4abc-bb31-79b417909d53.png" alt="Zohaway Takeaway Services" style={imageStyle} onClick={navigateToLink}/>
           <div style={textContainerStyle}>
             <h1 style={headerStyle}>Zohaway Takeaway Services</h1>
             <h2 style={subHeaderStyle}>Helping you turn 'What's for dinner?' into 'Dinner's here!'</h2>

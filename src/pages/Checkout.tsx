@@ -104,6 +104,7 @@ export function Checkout() {
     <form onSubmit={handleSubmit} style={formStyle}>
       <h1 style={headerStyle}>Checkout</h1>
       <h2 style={labelStyle}>Your Total is: {formatCurrency(getAmount())}</h2>
+      <h3 style={labelStyle}>Be a member and get 5% off your order today!!</h3>
       <div style={inputGroupStyle}>
         <label style={labelStyle}>First Name:</label>
         <input
