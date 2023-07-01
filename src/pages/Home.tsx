@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useEffect, FC } from 'react';
 
-export function Home() {
+export const Home: FC = () => {
+    useEffect(() => {
+        const originalOverflow = window.getComputedStyle(document.body).overflow;
+        document.body.style.overflow = 'hidden';
+        return () => {
+          document.body.style.overflow = originalOverflow;
+        };
+    }, []);
+
     return (
         <div style={containerStyle}>
           <img src="https://zohawaystorage.blob.core.windows.net/zohaway/Shrimp_One_hand_passing_on_a_take_away_parcel_from_a_restauraun_383e1fb4-27b0-4abc-bb31-79b417909d53.png" alt="Zohaway Takeaway Services" style={imageStyle} />
@@ -11,6 +19,8 @@ export function Home() {
         </div>
     );
 }
+
+// Styles...
 
 // Styles
 const containerStyle: React.CSSProperties = {
