@@ -8,10 +8,10 @@ export function Navbar() {
         <Container>
             <Nav className="me-auto">
                 <Nav.Link to="/" as={NavLink}>
-                    Home
+                    <div style={{fontSize: '2.5rem', fontWeight: 'bold'}}>Home</div>
                 </Nav.Link>
                 <Nav.Link to="/menu" as={NavLink}>
-                    Menu
+                <div style={{fontSize: '2.5rem', fontWeight: 'bold'}}>Menu</div>
                 </Nav.Link>
             </Nav>
             {cartQuantity > 0 && (
@@ -41,3 +41,4 @@ export function Navbar() {
         </Container>
     </NavbarBs>
 }
+

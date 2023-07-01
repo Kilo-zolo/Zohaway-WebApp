@@ -8,7 +8,6 @@ export function Menu() {
     
     return (
         <>
-            <h1>Menu</h1>
             <Row md={2} xs={1} lg={3} className="g-3">
                 {categories.map((item: CategoryType) => (
                     <Col key={item.CatName}>
