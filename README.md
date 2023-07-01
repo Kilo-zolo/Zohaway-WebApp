@@ -1,4 +1,21 @@
 # Zohaway Take Away Service Web Application #
+## Technology Stack ##
+
+The application is built with the following technologies:
+
+- React.js (with Hooks and Context)
+- TypeScript
+- Vite.js
+- Azure for deployment
+- Bootstrap for UI styling
+
+## Prerequisites ##
+
+To run the application locally, you'll need:
+
+- Node.js and npm installed on your system
+- An Azure account if you wish to deploy the application
+
 ## To Start on Local Machine ##
 1. Clone the Repository on your local machine
 ```
@@ -42,7 +59,6 @@ SQL folder:
  - create_tables.sql: Primary SQL script used to create the DB structure and includes tables, constraints and triggers  
 
 WebApp folder: Contains source for React Typescript frontend 
-- React and Typescript based frontend
 - E-commerce application with menu, product choice and checkout functionality
 
 
