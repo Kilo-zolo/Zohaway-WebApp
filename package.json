@@ -1,7 +1,7 @@
 {
-  "name": "webapp",
+  "name": "zohtek-webapp",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "start": "vite",
@@ -28,5 +28,9 @@
     "eslint-plugin-react-refresh": "^0.3.4",
     "typescript": "^5.0.2",
     "vite": "^4.3.9"
-  }
+  },
+  "description": "![Zohtek-WebApp (1)](https://github.com/Kilo-zolo/Zohaway-WebApp/assets/49636909/2259e316-65c1-4843-952f-0059f077273d)",
+  "main": "index.html",
+  "author": "",
+  "license": "ISC"
 }
