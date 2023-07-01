@@ -1,5 +1,5 @@
-## Zohaway Take Away Service Web Application ##
-# To Start on Local Machine #
+# Zohaway Take Away Service Web Application #
+## To Start on Local Machine ##
 1. Clone the Repository on your local machine
 ```
 Git clone https://github.com/Kilo-zolo/Zohaway-WebApp.git
@@ -21,14 +21,14 @@ or
 npm run dev
 ```
 
-# High-Level Architecture #
+## High-Level Architecture ##
 ![Zohtek-WebApp (1)](https://github.com/Kilo-zolo/Zohaway-WebApp/assets/49636909/2259e316-65c1-4843-952f-0059f077273d)
 
 - Azure WebApp with React framework as frontend
 - Azure functions as middle tier
 - MS SQL as Backend Database
 
-# Folder Structure #
+## Folder Structure ##
 Functions folder: Contains source for azure functions 
  - GetCategories
  - GetProductsperCategory
