@@ -10,7 +10,7 @@ export const Home: FC = () => {
     }, []);
 
     const navigateToLink = () => {
-        window.open('/Menu', 'Menu');
+        window.location.href = '/Menu';
     }
 
     return (

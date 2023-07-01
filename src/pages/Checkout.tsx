@@ -70,6 +70,11 @@ export function Checkout() {
       message = message + " As a member you have scored an additional 5% discount. Yes we are generous!"
     }
 
+    if( formData.paymentPreference == 'creditCard' && formData.order_amount > 0)
+    {
+      formData.order_amount = formData.order_amount + (formData.order_amount * 0.0175);  
+    }
+
     // Invoke the placeOrder function with the form data
     placeOrder(formData.order_amount, orderUser, cartItems);
     
