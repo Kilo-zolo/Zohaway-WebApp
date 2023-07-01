@@ -1,4 +1,26 @@
 ## Zohaway Take Away Service Web Application ##
+# To Start on Local Machine #
+1. Clone the Repository on your local machine
+```
+Git clone https://github.com/Kilo-zolo/Zohaway-WebApp.git
+```
+
+2. cd into root folder
+
+3. Install dependencies 
+
+```
+npm install
+```
+
+4. Start webapp on local machine
+
+```
+npm start
+or
+npm run dev
+```
+
 # High-Level Architecture #
 ![Zohtek-WebApp (1)](https://github.com/Kilo-zolo/Zohaway-WebApp/assets/49636909/2259e316-65c1-4843-952f-0059f077273d)
 
