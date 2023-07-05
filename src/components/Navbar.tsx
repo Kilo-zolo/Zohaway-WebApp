@@ -14,6 +14,11 @@ export function Navbar() {
                 <div style={{fontSize: '2.5rem', fontWeight: 'bold'}}>Menu</div>
                 </Nav.Link>
             </Nav>
+            <Nav className="d-flex flex-row-reverse">
+                <Nav.Link to="/login" as={NavLink}>
+                <div style={{fontSize: '2.5rem', fontWeight: 'bold'}}>Login</div>
+                </Nav.Link>
+            </Nav>
             {cartQuantity > 0 && (
             <Button onClick={openCart} style={{width: "3rem", height: "3rem", position: "relative"}}
                     variant="outline-primary"

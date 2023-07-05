@@ -9,6 +9,7 @@ import { Main } from "./pages/Mains"
 import { Dessert } from "./pages/Desserts"
 import { ShoppingCartProvider } from "./context/ShoppingCartContext"
 import { Checkout } from "./pages/Checkout"
+import { Login } from "./pages/Login"
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
           <Route path="/category/Mains" element={<Main />} />
           <Route path="/category/Desserts" element={<Dessert />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
         </Container>
       </ShoppingCartProvider>

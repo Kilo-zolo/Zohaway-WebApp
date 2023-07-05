@@ -270,7 +270,7 @@ export function Checkout() {
 }
 
 // Styles
-const formStyle: React.CSSProperties = {
+export const formStyle: React.CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -282,24 +282,24 @@ const formStyle: React.CSSProperties = {
   backgroundColor: '#f9f9f9',
 };
 
-const headerStyle: React.CSSProperties = {
+export const headerStyle: React.CSSProperties = {
   textAlign: 'center',
   marginBottom: '1.5rem',
 };
 
-const inputGroupStyle: React.CSSProperties = {
+export const inputGroupStyle: React.CSSProperties = {
   marginBottom: '1.5rem',
   display: 'flex',
   alignItems: 'center',
 };
 
-const labelStyle: React.CSSProperties = {
+export const labelStyle: React.CSSProperties = {
   marginRight: '0.5rem',
   minWidth: '180px',
   fontSize: '1.1rem',
 };
 
-const inputStyle: React.CSSProperties = {
+export const inputStyle: React.CSSProperties = {
   padding: '0.5rem',
   borderRadius: '4px',
   border: '1px solid #ccc',
@@ -321,7 +321,7 @@ const radioLabelStyle: React.CSSProperties = {
   fontSize: '0.9rem',
 };
 
-const submitButtonStyle: React.CSSProperties = {
+export const submitButtonStyle: React.CSSProperties = {
   padding: '0.5rem 1rem',
   borderRadius: '4px',
   backgroundColor: '#4caf50',
