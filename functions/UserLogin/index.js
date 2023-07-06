@@ -13,7 +13,7 @@ module.exports = async function (context, req) {
     };
 
     try {
-        // Variable for User param choice- js
+        // Variable for User param choice
         var email = req.body.email;
         var pass = req.body.password;
 

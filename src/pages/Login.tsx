@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { submitButtonStyle, formStyle, headerStyle, inputGroupStyle, labelStyle, inputStyle } from './Checkout';
+import { UserLoginType, UserLogin } from '../components/UserLogin';
+
 
 export function Login() {
     const [formData, setFormData] = useState({
         email: '',
         password: ''
       });
-    
+
     const navigate = useNavigate();
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -16,11 +18,20 @@ export function Login() {
           [name]: value
         }));
       };
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 
         event.preventDefault(); 
 
         const {email, password } = formData;
+
+        const User: UserLoginType = {
+          email: email || '',
+          password: password || ''
+        }
+        
+        // Invoke the placeholder function with the form data
+        let response = await UserLogin(User);
+          localStorage.setItem("userData", response);
 
         if (!email || !password) {
             console.log('Email and Password required')
@@ -30,8 +41,10 @@ export function Login() {
             email: '',
             password: ''
           });
-
+        
+        
         navigate('/')
+        window.location.reload()
     }
 
     return(

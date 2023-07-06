@@ -2,8 +2,14 @@ import {Button, Container, Nav, Navbar as NavbarBs} from "react-bootstrap"
 import { NavLink } from "react-router-dom"
 import { useShoppingCart } from "../context/ShoppingCartContext"
 
+
+
+
 export function Navbar() {
     const { openCart, cartQuantity} = useShoppingCart()
+    const userData = localStorage.getItem('userData')
+    const userInfo = userData ? JSON.parse(userData) : null
+
     return <NavbarBs sticky = "top" className="bg-white shadow-sm mb-3">
         <Container>
             <Nav className="me-auto">
@@ -15,9 +21,13 @@ export function Navbar() {
                 </Nav.Link>
             </Nav>
             <Nav className="d-flex flex-row-reverse">
-                <Nav.Link to="/login" as={NavLink}>
-                <div style={{fontSize: '2.5rem', fontWeight: 'bold'}}>Login</div>
-                </Nav.Link>
+                {userInfo ? (
+                    <div style={{fontSize: '2.5rem', fontWeight: 'bold'}}>{"Hello, " + userInfo[0].FName + "!"}</div>
+                ) : (
+                    <Nav.Link to="/login" as={NavLink}>
+                    <div style={{fontSize: '2.5rem', fontWeight: 'bold'}}>Login</div>
+                    </Nav.Link>
+                )}
             </Nav>
             {cartQuantity > 0 && (
             <Button onClick={openCart} style={{width: "3rem", height: "3rem", position: "relative"}}
