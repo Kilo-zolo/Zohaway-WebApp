@@ -12,6 +12,7 @@ export function useAppetizers() {
           'https://zohaway-functions.azurewebsites.net/api/GetProductperCategory?cn=Appetizers'
         );
         const data: AppetizerItemProps[] = await response.json();
+        localStorage.setItem("Appetizers", JSON.stringify(data))
         setAppetizersMap(data);
       } catch (error) {
         console.error(error);

@@ -1,10 +1,23 @@
 import { Col, Row } from "react-bootstrap";
 import { useCategories, CategoryType } from "../components/Categories";
 import { Link } from "react-router-dom";
-import { Category } from "../components/Category";
+import { Category, CategoryProps } from "../components/Category";
+import { useEffect, useState } from "react";
 
 export function Menu() {
-    const categories = useCategories();
+    const fetchedCategories = useCategories();
+
+    const [categories, setFetchedItems] = useState<CategoryProps[]>([]);
+    
+    useEffect (() => {
+        const categoryData = localStorage.getItem("Categories");
+        if (categoryData) {
+            const localCats = JSON.parse(categoryData);
+            setFetchedItems(localCats)
+        } else {
+            setFetchedItems(fetchedCategories)
+        }
+    }, [fetchedCategories])
     
     return (
         <>

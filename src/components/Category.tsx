@@ -1,6 +1,6 @@
 import { Card } from "react-bootstrap"
 
-type CategoryProps = {
+export type CategoryProps = {
     CatName: string, 
     IMG: string
 }

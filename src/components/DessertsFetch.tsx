@@ -12,6 +12,7 @@ export function useDesserts() {
           'https://zohaway-functions.azurewebsites.net/api/GetProductperCategory?cn=Desserts'
         );
         const data: DessertItemProps[] = await response.json();
+        localStorage.setItem("Desserts", JSON.stringify(data))
         setDessertsMap(data);
       } catch (error) {
         console.error(error);

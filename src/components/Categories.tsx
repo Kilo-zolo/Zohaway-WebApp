@@ -15,6 +15,7 @@ export function useCategories() {
           'https://zohaway-functions.azurewebsites.net/api/GetCategories'
         );
         const data: CategoryType[] = await response.json();
+        localStorage.setItem("Categories", JSON.stringify(data))
         setCategoriesMap(data);
       } catch (error) {
         console.error(error);

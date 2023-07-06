@@ -12,6 +12,7 @@ export function useMains() {
           'https://zohaway-functions.azurewebsites.net/api/GetProductperCategory?cn=Mains'
         );
         const data: MainItemProps[] = await response.json();
+        localStorage.setItem("Mains", JSON.stringify(data))
         setMainsMap(data);
       } catch (error) {
         console.error(error);
