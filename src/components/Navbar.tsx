@@ -7,8 +7,8 @@ import { useShoppingCart } from "../context/ShoppingCartContext"
 
 export function Navbar() {
     const { openCart, cartQuantity} = useShoppingCart()
-    const userData = localStorage.getItem('userData')
-    const userInfo = userData ? JSON.parse(userData) : null
+    var userData = localStorage.getItem('userData');
+    var userInfo = userData ? JSON.parse(userData) : null;
 
     return <NavbarBs sticky = "top" className="bg-white shadow-sm mb-3">
         <Container>
@@ -21,7 +21,8 @@ export function Navbar() {
                 </Nav.Link>
             </Nav>
             <Nav className="d-flex flex-row-reverse">
-                {userInfo ? (
+                { 
+                    userInfo ? (
                     <div style={{fontSize: '2.5rem', fontWeight: 'bold'}}>{"Hello, " + userInfo[0].FName + "!"}</div>
                 ) : (
                     <Nav.Link to="/login" as={NavLink}>
