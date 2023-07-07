@@ -15,11 +15,11 @@ export const Home: FC = () => {
 
     return (
         <div style={containerStyle}>
-          <img src="https://zohawaystorage.blob.core.windows.net/zohaway/Shrimp_One_hand_passing_on_a_take_away_parcel_from_a_restauraun_383e1fb4-27b0-4abc-bb31-79b417909d53.png" alt="Zohaway Takeaway Services" style={imageStyle} onClick={navigateToLink}/>
           <div style={textContainerStyle}>
             <h1 style={headerStyle}>Zohaway Takeaway Services</h1>
             <h2 style={subHeaderStyle}>Helping you turn 'What's for dinner?' into 'Dinner's here!'</h2>
           </div>
+          <img src="https://zohawaystorage.blob.core.windows.net/zohaway/Shrimp_One_hand_passing_on_a_take_away_parcel_from_a_restauraun_383e1fb4-27b0-4abc-bb31-79b417909d53.png" alt="Zohaway Takeaway Services" style={imageStyle} onClick={navigateToLink}/>
         </div>
     );
 }
@@ -33,7 +33,8 @@ const containerStyle: React.CSSProperties = {
     alignItems: 'center',
     justifyContent: 'center',
     height: '100vh',
-    width: '100vw',
+    maxWidth: '80%',
+    width: '100%',
     backgroundColor: '#f9f9f9',
     overflow: 'hidden',
 };
@@ -46,12 +47,13 @@ const textContainerStyle: React.CSSProperties = {
     backgroundColor: 'rgba(255, 255, 255, 0.7)',
     borderRadius: '10px',
     padding: '20px',
-    marginTop: '2rem',
+    marginBottom: '2rem',
+    zIndex: 1, // Increase zIndex value
 };
 
 const imageStyle: React.CSSProperties = {
-    width: '50%',
-    height: '50%',
+    maxWidth: '100%', // Set max-width to 100%
+    maxHeight: '60%',
     marginBottom: '1rem',
 };
 
