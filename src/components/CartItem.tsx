@@ -9,9 +9,17 @@ type CartItemProps = {
 }
 
 export function CartItem({id, quantity}: CartItemProps) {
-    const productItems = useProducts();
+    const productData = localStorage.getItem("Products");
+    let productItems;
+    
+    if(productData !== null) {
+        productItems = JSON.parse(productData);
+    } else {
+        productItems = useProducts();
+    }
+    
     const {removeFromCart} = useShoppingCart()
-    const item = productItems.find(i => i.ID === id)
+    const item = productItems.find((i: { ID: number; }) => i.ID === id)
     if(item == undefined) return undefined
 
     return (

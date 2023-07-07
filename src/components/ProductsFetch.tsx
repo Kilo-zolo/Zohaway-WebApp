@@ -17,6 +17,7 @@ export function useProducts() {
           'https://zohaway-functions.azurewebsites.net/api/GetProducts'
         );
         const data: ProductItem[] = await response.json();
+        localStorage.setItem("Products", JSON.stringify(data))
         setProductMap(data);
       } catch (error) {
         console.error(error);
