@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { getAmount } from "../components/ShoppingCart";
+import React, { useEffect, useState } from 'react';
+import { getAmount, total_amount } from "../components/ShoppingCart";
 import { formatCurrency } from "../utilities/formatCurrency";
 import { OrderUserType, placeOrder } from '../components/OrderPlace';
 import { useShoppingCart } from '../context/ShoppingCartContext';
@@ -88,10 +88,34 @@ export function Checkout() {
       hiddenMessage: message,
     }));
 
-    localStorage.clear();
+    localStorage.setItem("total_amount", '0');
+    localStorage.removeItem('shopping-cart');
     //cartItems.splice(0);
     resetCart();
   };
+
+  useEffect(() => {
+    var userData = localStorage.getItem('userData');
+    var userInfo = userData ? JSON.parse(userData) : null;
+    if (userInfo && userInfo.length > 0) {
+      setFormData({
+        firstName : userInfo[0].FName,
+        lastName : userInfo[0].LName,
+        phone : userInfo[0].PNumber,
+        registerForMembership: true,
+        paymentPreference: '', 
+        email : userInfo[0].Email,
+        password: '',
+        creditCardNumber: 0,
+        creditCardHolderName: '',
+        cvc: 0,
+        expiryDate: '',
+        hiddenMessage: '',
+        order_amount: 0
+      });
+      //setShowMembershipFields(true); 
+    } 
+  }, []);  
 
   if (formData.hiddenMessage)
   {
@@ -102,7 +126,7 @@ export function Checkout() {
       <p style={messageStyle}>{formData.hiddenMessage}</p>
       <button type="submit" onClick={() => navigate('/')} style={submitButtonStyle}>Go Home</button>
       </form>
-    )
+    );
   }
 
   return (
@@ -118,6 +142,7 @@ export function Checkout() {
           required
           onChange={handleChange}
           style={inputStyle}
+          value={formData.firstName}
         />
       </div>
       <div style={inputGroupStyle}>
@@ -127,6 +152,7 @@ export function Checkout() {
           name="lastName"
           onChange={handleChange}
           style={inputStyle}
+          value={formData.lastName}
         />
       </div>
       <div style={inputGroupStyle}>
@@ -137,6 +163,7 @@ export function Checkout() {
           required
           onChange={handleChange}
           style={inputStyle}
+          value={formData.phone}
         />
       </div>
       <div style={inputGroupStyle}>
@@ -147,6 +174,7 @@ export function Checkout() {
             name="registerForMembership"
             value="yes"
             onChange={handleMembershipChange}
+            checked={formData.registerForMembership}
             style={radioStyle}
           />
           <span style={radioLabelStyle}>Yes</span>
@@ -155,7 +183,7 @@ export function Checkout() {
             name="registerForMembership"
             value="no"
             onChange={handleMembershipChange}
-            checked={!showMembershipFields}
+            checked={!formData.registerForMembership}
             style={radioStyle}
           />
           <span style={radioLabelStyle}>No</span>
@@ -171,6 +199,7 @@ export function Checkout() {
               required
               onChange={handleChange}
               style={inputStyle}
+              value={formData.email}
             />
           </div>
           <div style={inputGroupStyle}>
@@ -331,7 +360,7 @@ export const submitButtonStyle: React.CSSProperties = {
   fontSize: '1rem',
 };
 
-const messageStyle: React.CSSProperties = {
+export const messageStyle: React.CSSProperties = {
   marginTop: '1.5rem',
   textAlign: 'center',
   fontWeight: 'bold',

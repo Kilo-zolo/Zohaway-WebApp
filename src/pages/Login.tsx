@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { submitButtonStyle, formStyle, headerStyle, inputGroupStyle, labelStyle, inputStyle } from './Checkout';
+import { submitButtonStyle, formStyle, headerStyle, inputGroupStyle, labelStyle, inputStyle, messageStyle } from './Checkout';
 import { UserLoginType, UserLogin } from '../components/UserLogin';
 
 
 export function Login() {
     const [formData, setFormData] = useState({
         email: '',
-        password: ''
+        password: '',
+        hiddenMessage: ''
       });
 
     const navigate = useNavigate();
@@ -25,26 +26,26 @@ export function Login() {
         const {email, password } = formData;
 
         const User: UserLoginType = {
-          email: email || '',
-          password: password || ''
+          email: email,
+          password: password
         }
-        
+        var message = ''
         // Invoke the placeholder function with the form data
         let response = await UserLogin(User);
-          localStorage.setItem("userData", response);
-
-        if (!email || !password) {
-            console.log('Email and Password required')
-            return;
-        }
-        setFormData({
-            email: '',
-            password: ''
-          });
+          if (JSON.parse(response).length > 0 ){
+            localStorage.setItem("userData", response);
+            navigate('/')
+            window.location.reload()
+          } else {
+           message = "Invalid Email and/or Password, please try again.";
+          }
         
-        
-        navigate('/')
-        window.location.reload()
+          setFormData(prevState => ({
+            ...prevState,
+            password: '',
+            hiddenMessage: message,
+          }));
+      
     }
 
     return(
@@ -71,6 +72,7 @@ export function Login() {
             />
           </div>
           <button type="submit" style={submitButtonStyle}>Login</button>
+          {formData.hiddenMessage.length > 0 ? (<p style={messageStyle}>{formData.hiddenMessage}</p>): null}
         </form>
     );
 }
