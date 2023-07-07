@@ -1,5 +1,4 @@
 # Zohaway Take Away Service Web Application #
-## https://zohaway.azurewebsites.net/ ##
 
 ## Technology Stack ##
 
