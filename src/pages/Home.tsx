@@ -29,14 +29,13 @@ export const Home: FC = () => {
 // Styles
 const containerStyle: React.CSSProperties = {
     display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100vh',
-    maxWidth: '80%',
-    width: '100%',
-    backgroundColor: '#f9f9f9',
-    overflow: 'hidden',
+  flexDirection: 'column',
+  alignItems: 'center',
+  maxWidth: '700px',
+  margin: '0 auto',
+  padding: '1.5rem',
+  borderRadius: '4px',
+  backgroundColor: '#f9f9f9',
 };
 
 const textContainerStyle: React.CSSProperties = {
