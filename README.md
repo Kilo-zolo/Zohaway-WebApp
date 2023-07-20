@@ -14,6 +14,7 @@ The application is built with the following technologies:
 
 To run the application locally, you'll need:
 
+- Coordination with me for the initial setup, as it involves enabling the MS SQL Server and launching Azure functions. Please don't hesitate to contact me at krish5gupta25@gmail.com or on my phone at +61 483815547
 - Node.js and npm installed on your system
 - An Azure account if you wish to deploy the application
 
